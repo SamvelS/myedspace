@@ -1,23 +1,29 @@
-import React from 'react';
 import './App.css';
+import { AuthProvider, useAuth } from './auth/AuthContext';
+
+function AuthControls() {
+  const { isLoggedIn, login, logout } = useAuth()
+  return (
+    <div className="Auth-bar">
+        <button onClick={!isLoggedIn ? login : logout}>{!isLoggedIn ? "Log in" : "Log out"}</button>
+    </div>
+  )
+}
+
+function AppContent() {
+  return (
+    <div className="App">
+      <AuthControls/>
+      <div className="App-content">content</div>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <AppContent/>
+    </AuthProvider>
   );
 }
 
