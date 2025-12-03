@@ -66,7 +66,8 @@ export const YouTubePlayer: VideoPlayerComponent = ({
             if (
               prevTime !== null &&
               Math.abs(currentTime - prevTime) > SEEK_THRESHOLD_SECONDS &&
-              (state === YOUTUBE_STATE.PLAYING || state === YOUTUBE_STATE.BUFFERING)
+              (state === YOUTUBE_STATE.PLAYING ||
+                state === YOUTUBE_STATE.BUFFERING)
             ) {
               handleVideoEvent("seek", currentTime, prevTime);
             }

@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    YOUTUBE?: any;
+    YT?: any;
     onYouTubeIframeAPIReady?: () => void;
   }
 }
@@ -9,16 +9,16 @@ const YOUTUBE_IFRAME_API_SRC = "https://www.youtube.com/iframe_api";
 
 export function loadYouTubeIframeAPI(): Promise<any> {
   return new Promise((resolve) => {
-    if (window.YOUTUBE && window.YOUTUBE.Player) {
-      resolve(window.YOUTUBE);
+    if (window.YT && window.YT.Player) {
+      resolve(window.YT);
       return;
     }
 
     if (document.querySelector(`script[src='${YOUTUBE_IFRAME_API_SRC}']`)) {
       const interval = window.setInterval(() => {
-        if (window.YOUTUBE && window.YOUTUBE.Player) {
+        if (window.YT && window.YT.Player) {
           window.clearInterval(interval);
-          resolve(window.YOUTUBE);
+          resolve(window.YT);
         }
       }, 50);
       return;
@@ -31,7 +31,7 @@ export function loadYouTubeIframeAPI(): Promise<any> {
     firstScript?.parentNode?.insertBefore(tag, firstScript);
 
     window.onYouTubeIframeAPIReady = () => {
-      resolve(window.YOUTUBE);
+      resolve(window.YT);
     };
   });
 }
